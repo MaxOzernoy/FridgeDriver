@@ -37,11 +37,11 @@ int analogInValueInSteps2;
 bool scereenTrigger = false;
 // bool trigger = false;
 
-String temperatureInString;                      // i convert the float into the temperatureInString var
+String temperatureInString;                      // I convert the float into the temperatureInString var
 String temperatureHeader = "My temperature";
 
 unsigned long previousMillis = 0; 
-  unsigned long currentMillis;
+unsigned long currentMillis;
 
 
 void setup() {
@@ -70,7 +70,7 @@ void setup() {
 void loop() {
   currentMillis = millis();
   getTemperatureEachTenSec();
-  speakerTrigger();         // move it down
+  speakerTrigger();        
   temperatureSetRoutine();
   beeperReactionHigh();
   beeperReactionLow();
@@ -243,7 +243,6 @@ void tempBorders(){
     display.setCursor(74, 48);            //(98, 48)
     display.println(deactTemperature , 1);
   } 
-
 
   display.display();
 }
