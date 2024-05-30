@@ -210,13 +210,13 @@ void myTemperature(){
   // int length = temperatureHeader.length();
   // int length2 = temperatureInString.length() - 1;
   temperatureInString[temperatureInString.length()-1] = NULL;
-	display.setCursor((128-(temperatureHeader.length())*6)/2, 10); //(x,y)        // this sets the cursor so that the input is centered in the screen
+  display.setCursor((128-(temperatureHeader.length())*6)/2, 10); //(x,y)        //This sets the cursor so that the input is centered in the screen
   display.setTextSize(1,2);
-	display.println("My temperature");
+  display.println("My temperature");
 
-	display.setCursor((128-(temperatureInString.length() - 1)*12)/2, 32);         // this sets the cursor so that the input is centered in the screen
+  display.setCursor((128-(temperatureInString.length() - 1)*12)/2, 32);         // this sets the cursor so that the input is centered in the screen
   display.setTextSize(2);
-	display.print(temperatureInString);
+  display.print(temperatureInString);
   display.display();
 };
 
