@@ -1,4 +1,4 @@
-    //version 0.5
+
 // Libs for screen
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
@@ -34,7 +34,8 @@ int analogInValue = 0;
 int analogInValueInSteps1;
 int analogInValueInSteps2;
 
-bool scereenTrigger = false;
+bool scereenTriggerResistor = false;
+bool scereenTriggerButton = false;
 
 String temperatureInString;                      // I convert the float into the temperatureInString var
 String temperatureHeader = "My temperature";
@@ -69,7 +70,7 @@ void setup() {
 void loop() {
   currentMillis = millis();
   getTemperatureEachTenSec();
-  speakerTrigger();        
+  speakerTrigger();         // move it down
   temperatureSetRoutine();
   beeperReactionHigh();
   beeperReactionLow();
@@ -104,26 +105,33 @@ void getTemperatureEachTenSec(){
 }
 
 void temperatureSetRoutine(){
-  if(scereenTrigger || (digitalRead(switcher) == HIGH)){                       //temperatureSetRoutine
+  if(scereenTriggerResistor){                       //temperatureSetRoutine
     tempBorders();
     if(currentMillis - previousMillis < 3000){
     }else{
-      scereenTrigger = false;
+      scereenTriggerResistor = false;
     }
   }else{
-    if (digitalRead(switcher) == HIGH){
+    if(digitalRead(switcher) == HIGH){
+      scereenTriggerButton = true;
+      previousMillis = currentMillis;
+    }
+    if((currentMillis - previousMillis < 3000) && scereenTriggerButton == true){
       tempBorders();
     }else{
-      myTemperature();
+      scereenTriggerButton = false;
+      myTemperature();  
     }
   }
 
   if(analogInValueInSteps1 != analogInValueInSteps2){
     analogInValueInSteps2 = analogInValueInSteps1;
-    scereenTrigger = true;
+    scereenTriggerResistor = true;
     previousMillis = currentMillis;
   }
 }
+
+
 
 void relayTrigger(){
   if(temperature >= actTemperature){
