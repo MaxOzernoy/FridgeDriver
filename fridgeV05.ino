@@ -35,7 +35,6 @@ int analogInValueInSteps1;
 int analogInValueInSteps2;
 
 bool scereenTrigger = false;
-// bool trigger = false;
 
 String temperatureInString;                      // I convert the float into the temperatureInString var
 String temperatureHeader = "My temperature";
