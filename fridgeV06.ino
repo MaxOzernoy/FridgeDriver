@@ -11,7 +11,7 @@
 #define switcher 6
 #define sensorPin A2
 #define relayPin 7
-#define relayPin2 9
+// #define relayPin2 9
 
 OneWire ourWire(DS18B20);
 DallasTemperature sensor(&ourWire);
@@ -24,9 +24,9 @@ DallasTemperature sensor(&ourWire);
 Adafruit_SSD1306 display(128, 64, &Wire, OLED_RST_PIN);
 
 float temperature = 0;
-bool beeperActivator = false;                     // this is like a trigger that makes speaker active only when it's true;
+// bool beeperActivator = false;                     // this is like a trigger that makes speaker active only when it's true;
 
-const float hysteresis = 0.2;
+// const float hysteresis = 0.2;
 const int actTemperature = 5;
 float deactTemperature;
 
@@ -49,7 +49,7 @@ void setup() {
   // Serial.println("start");
   pinMode(relayPin, OUTPUT);
   pinMode(speaker, OUTPUT);
-  pinMode(relayPin2, OUTPUT);
+  // pinMode(relayPin2, OUTPUT);
   pinMode(switcher, INPUT);
 
   sensor.begin();
@@ -70,10 +70,10 @@ void setup() {
 void loop() {
   currentMillis = millis();
   getTemperatureEachTenSec();
-  speakerTrigger();         // move it down
+  // speakerTrigger();         // move it down
   temperatureSetRoutine();
-  beeperReactionHigh();
-  beeperReactionLow();
+  // beeperReactionHigh();
+  // beeperReactionLow();
   temperatureSwithcer();
   relayTrigger();
 
@@ -82,20 +82,20 @@ void loop() {
 }
 //_____________________________________________________________________________________________________________________________________________________________
 
-void beeperReactionLow(){
-  if (temperature <= deactTemperature && beeperActivator == true){
-    speakerReactionLow();
-    beeperActivator = false;
-  }
-}
+// void beeperReactionLow(){
+//   if (temperature <= deactTemperature && beeperActivator == true){
+//     speakerReactionLow();
+//     beeperActivator = false;
+//   }
+// }
 
-void beeperReactionHigh(){
-  if (temperature >= actTemperature && beeperActivator == true){
-    speakerReactionHigh();
-    speakerReactionHigh();
-    beeperActivator = false;
-  }
-}
+// void beeperReactionHigh(){
+//   if (temperature >= actTemperature && beeperActivator == true){
+//     speakerReactionHigh();
+//     speakerReactionHigh();
+//     beeperActivator = false;
+//   }
+// }
 
 void getTemperatureEachTenSec(){
   if(currentMillis - previousMillis > 10000){
@@ -183,26 +183,26 @@ void powerOn(){                         // The function that plays ones when pow
   }
 }
 
-void speakerReactionHigh () {         // The function that plays melody related for reaching HIGH temperature parameter
-  for(int i = 1; i <= 4; i++){
-    digitalWrite(speaker, HIGH);
-    delay(70);
-    digitalWrite(speaker, LOW);
-    delay(70);
-  }
-  delay(1000);
-}
+// void speakerReactionHigh () {         // The function that plays melody related for reaching HIGH temperature parameter
+//   for(int i = 1; i <= 4; i++){
+//     digitalWrite(speaker, HIGH);
+//     delay(70);
+//     digitalWrite(speaker, LOW);
+//     delay(70);
+//   }
+//   delay(1000);
+// }
 
-void speakerReactionLow () {         // The function that plays melody related for reaching LOW temperature parameter
-  digitalWrite(speaker, HIGH);
-  delay(500);
-  digitalWrite(speaker, LOW);
-  delay(100);
-  digitalWrite(speaker, HIGH);
-  delay(70);
-  digitalWrite(speaker, LOW);
-  delay(1000);
-}
+// void speakerReactionLow () {         // The function that plays melody related for reaching LOW temperature parameter
+//   digitalWrite(speaker, HIGH);
+//   delay(500);
+//   digitalWrite(speaker, LOW);
+//   delay(100);
+//   digitalWrite(speaker, HIGH);
+//   delay(70);
+//   digitalWrite(speaker, LOW);
+//   delay(1000);
+// }
 
 void myTemperature(){
   display.clearDisplay();
@@ -254,9 +254,11 @@ void tempBorders(){
   display.display();
 }
 
-void speakerTrigger(){
-  if (temperature < (actTemperature - hysteresis) && temperature > (deactTemperature + hysteresis ) ){
-    beeperActivator = true;
-  }   
-}
+// void speakerTrigger(){
+//   if (temperature < (actTemperature - hysteresis) && temperature > (deactTemperature + hysteresis ) ){
+//     beeperActivator = true;
+//   }   
+// }
 
+
+// Add fridge compressor condition on the screen.
